@@ -1,125 +1,73 @@
-const cfg = window.RITUMATI_CONFIG || {};
-const ready = cfg.spreadsheetId && !cfg.spreadsheetId.includes('YOUR_');
+const cfg=window.RITUMATI_CONFIG||{};
+const ready=cfg.spreadsheetId&&!cfg.spreadsheetId.includes('YOUR_');
+const fallbackStats={women_reached:1200,sessions:85,districts_reached:12,satisfaction:92};
 
-const fallbackStats={women_reached:1200,sessions:18,districts_reached:7,satisfaction:92,annual_goal:2000,annual_completed:1440};
-
-function text(el,v){const x=document.getElementById(el);if(x)x.textContent=v??'—';}
-function parseCSV(csv){
-  const rows=[];let row=[],cell='',q=false;
-  for(let i=0;i<csv.length;i++){
-    const c=csv[i],n=csv[i+1];
-    if(c==='"'){if(q&&n==='"'){cell+='"';i++;}else q=!q;}
-    else if(c===','&&!q){row.push(cell);cell='';}
-    else if((c==='\n'||c==='\r')&&!q){
-      if(c==='\r'&&n==='\n')i++;
-      row.push(cell);cell='';
-      if(row.some(v=>v!==''))rows.push(row);
-      row=[];
-    } else cell+=c;
-  }
-  if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row);}
-  if(!rows.length)return[];
-  const headers=rows.shift().map(x=>x.trim());
-  return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])));
-}
-async function fetchSheet(sheetName){
-  if(!ready)return [];
-  const url=`https://docs.google.com/spreadsheets/d/${encodeURIComponent(cfg.spreadsheetId)}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
-  const res=await fetch(url,{cache:'no-store'});
-  if(!res.ok)throw new Error(`Could not read ${sheetName} sheet`);
-  return parseCSV(await res.text());
-}
-async function sheet(){
-  const rows=await fetchSheet('Dashboard');
-  return rows[0]||null;
-}
-async function districtSheet(){
-  return fetchSheet('Districts');
-}
-function applyStats(s){
-  text('womenReached',s.women_reached);
-  text('sessions',s.sessions);
-  text('districtsReached',s.districts_reached);
-  text('satisfaction',`${s.satisfaction}%`);
-  const pct=s.annual_goal?Math.min(100,Math.round((Number(s.annual_completed)/Number(s.annual_goal))*100)):0;
-  text('goalPct',`${pct}%`);
-  const bar=document.getElementById('goalBar');if(bar)bar.style.width=pct+'%';
-}
 const fallbackDistricts=[
- ['Bokaro','', 'TRUE','Community outreach, awareness and health support.','TRUE',180,95],
- ['Chatra','', 'FALSE','Community outreach, awareness and health support.','TRUE',90,48],
- ['Deoghar','', 'FALSE','Community outreach, awareness and health support.','TRUE',120,62],
- ['Dhanbad','', 'TRUE','Community outreach, awareness and health support.','TRUE',260,135],
- ['Dumka','', 'FALSE','Community outreach, awareness and health support.','TRUE',110,58],
- ['East Singhbhum','Jamshedpur','TRUE','Community outreach, awareness and health support.','TRUE',300,155],
- ['Garhwa','', 'FALSE','Community outreach, awareness and health support.','TRUE',75,41],
- ['Giridih','', 'TRUE','Community outreach, awareness and health support.','TRUE',220,118],
- ['Godda','', 'FALSE','Community outreach, awareness and health support.','TRUE',85,44],
- ['Gumla','', 'FALSE','Community outreach, awareness and health support.','TRUE',95,50],
- ['Hazaribagh','', 'TRUE','Community outreach, awareness and health support.','TRUE',240,126],
- ['Jamtara','', 'FALSE','Community outreach, awareness and health support.','TRUE',80,43],
- ['Khunti','', 'FALSE','Community outreach, awareness and health support.','TRUE',70,38],
- ['Koderma','', 'FALSE','Community outreach, awareness and health support.','TRUE',85,45],
- ['Latehar','', 'FALSE','Community outreach, awareness and health support.','TRUE',75,40],
- ['Lohardaga','', 'FALSE','Community outreach, awareness and health support.','TRUE',90,47],
- ['Pakur','', 'FALSE','Community outreach, awareness and health support.','TRUE',70,36],
- ['Palamu','', 'FALSE','Community outreach, awareness and health support.','TRUE',150,78],
- ['Ramgarh','', 'FALSE','Community outreach, awareness and health support.','TRUE',100,52],
- ['Ranchi','', 'TRUE','Community outreach, awareness and health support.','TRUE',320,170],
- ['Sahibganj','', 'FALSE','Community outreach, awareness and health support.','TRUE',90,46],
- ['Seraikela-Kharsawan','', 'FALSE','Community outreach, awareness and health support.','TRUE',115,60],
- ['Simdega','', 'FALSE','Community outreach, awareness and health support.','TRUE',80,42],
- ['West Singhbhum','', 'FALSE','Community outreach, awareness and health support.','TRUE',130,68]
+['Bokaro','',true,180,95],['Chatra','',false,90,48],['Deoghar','',false,120,62],['Dhanbad','',true,260,135],['Dumka','',false,110,58],['East Singhbhum','Jamshedpur',true,300,155],['Garhwa','',false,75,41],['Giridih','',true,220,118],['Godda','',false,85,44],['Gumla','',false,95,50],['Hazaribagh','',true,240,126],['Jamtara','',false,80,43],['Khunti','',false,70,38],['Koderma','',false,85,45],['Latehar','',false,75,40],['Lohardaga','',false,90,47],['Pakur','',false,70,36],['Palamu','',false,150,78],['Ramgarh','',false,100,52],['Ranchi','',true,320,170],['Sahibganj','',false,90,46],['Seraikela-Kharsawan','',false,115,60],['Simdega','',false,80,42],['West Singhbhum','',false,130,68]
 ];
-let districtData=[];
-function districtName(d){return d.name + (d.city_alias ? ` (${d.city_alias})` : '');}
-function renderDistricts(rows){
-  const normalized=rows.length ? rows.map(r=>({name:r.name,city_alias:r.city_alias||'',priority:String(r.priority).toUpperCase()==='TRUE',description:r.description||'Community outreach, awareness and health support.',pads:Number(r.pads_distributed||0),people:Number(r.people_helped||0),active:String(r.active).toUpperCase()!=='FALSE'})) : fallbackDistricts.map(r=>({name:r[0],city_alias:r[1],priority:r[2]==='TRUE',description:r[3],active:r[4]==='TRUE',pads:r[5],people:r[6]}));
-  districtData=normalized.filter(d=>d.active);
-  const card=d=>`<button class="district" data-district="${d.name}"><strong>${districtName(d)}</strong>${d.priority?'<span class="badge">Priority</span>':''}<div class="district-metrics"><div class="district-metric"><b>${d.pads.toLocaleString('en-IN')}</b><span>Pads distributed</span></div><div class="district-metric"><b>${d.people.toLocaleString('en-IN')}</b><span>People helped</span></div></div></button>`;
-  const priority=document.getElementById('priorityDistricts'); if(priority)priority.innerHTML=districtData.filter(d=>d.priority).map(card).join('');
-  const all=document.getElementById('allDistricts'); if(all){ all.innerHTML=districtData.map(card).join(''); all.classList.add('collapsed'); }
-  const toggle=document.getElementById('toggleAllDistricts');
-  if(toggle){ toggle.onclick=()=>{ const open=all && !all.classList.contains('collapsed'); if(all)all.classList.toggle('collapsed'); toggle.textContent=open?'View all 24 districts →':'Hide all districts ↑'; if(!open) all?.scrollIntoView({behavior:'smooth',block:'nearest'}); }; }
-  document.querySelectorAll('[data-district]').forEach(el=>el.addEventListener('click',()=>selectDistrict(el.dataset.district)));
-  selectDistrict('Ranchi');
-}
-function selectDistrict(name){
-  const d=districtData.find(x=>x.name===name)||districtData[0]; if(!d)return;
-  text('districtTitle',districtName(d)); text('districtText',d.description); text('districtPads',d.pads.toLocaleString('en-IN')); text('districtPeople',d.people.toLocaleString('en-IN'));
-  document.querySelectorAll('[data-district]').forEach(el=>el.classList.toggle('active',el.dataset.district===d.name));
-}
-const localTestimonials=[
- ['Asha','Community participant','The session gave me a safe place to ask questions I had been too shy to ask before.','assets/photos/testimonials/testimonial-1.svg'],
- ['Priya','Adolescent participant','I understood what is normal during periods and when it is important to seek help.','assets/photos/testimonials/testimonial-2.svg'],
- ['Neha','Women’s group member','The volunteers explained everything simply and without judgement.','assets/photos/testimonials/testimonial-3.svg'],
- ['Kavita','School participant','The conversation made menstrual health feel much less embarrassing.','assets/photos/testimonials/testimonial-4.svg'],
- ['Riya','Volunteer','The programme helped us turn questions into practical health actions.','assets/photos/testimonials/testimonial-5.svg'],
- ['Sunita','Community participant','Knowing where to go for a health concern has made a real difference.','assets/photos/testimonials/testimonial-6.svg']
+
+const focusImages={
+Ranchi:'assets/photos/districts/district-1.jpg',
+'East Singhbhum':'assets/photos/districts/district-2.jpg',
+Dhanbad:'assets/photos/districts/district-3.jpg',
+Bokaro:'assets/photos/districts/district-4.jpg',
+Hazaribagh:'assets/photos/districts/district-5.jpg',
+Giridih:'assets/photos/districts/district-6.jpg'
+};
+
+const testimonialData=[
+['Aditi','Class 10, Ranchi','I feel more confident and prepared now.','assets/photos/testimonials/testimonial-1.jpg'],
+['Pooja','Class 9, Dhanbad','Now I know my body better and I’m not afraid.','assets/photos/testimonials/testimonial-2.jpg'],
+['Neha','Class 8, Bokaro','The session was very helpful and easy to understand.','assets/photos/testimonials/testimonial-3.jpg'],
+['Sunita','Teacher, Hazaribagh','We can now talk about periods without shame.','assets/photos/testimonials/testimonial-4.jpg'],
+['Rani','Class 9, Jamshedpur','This programme really cares about us.','assets/photos/testimonials/testimonial-5.jpg'],
+['Kavya','Class 10, Giridih','I learned so much, and I’ve shared it with my friends.','assets/photos/testimonials/testimonial-6.jpg']
 ];
-const localGallery=[
- ['Community session','assets/photos/gallery/gallery-1.svg','Replace with programme photo'],
- ['Health education','assets/photos/gallery/gallery-2.svg','Replace with programme photo'],
- ['Volunteer engagement','assets/photos/gallery/gallery-3.svg','Replace with programme photo'],
- ['Learning together','assets/photos/gallery/gallery-4.svg','Replace with programme photo'],
- ['School outreach','assets/photos/gallery/gallery-5.svg','Replace with programme photo'],
- ['Community voices','assets/photos/gallery/gallery-6.svg','Replace with programme photo']
+
+const galleryData=[
+['Community session','assets/photos/gallery/gallery-1.jpg'],
+['Health education','assets/photos/gallery/gallery-2.jpg'],
+['Volunteer engagement','assets/photos/gallery/gallery-3.jpg'],
+['Periods are normal','assets/photos/gallery/gallery-4.jpg'],
+['School outreach','assets/photos/gallery/gallery-5.jpg']
 ];
-function renderLocalContent(){
- const t=document.getElementById('testimonials');
- if(t)t.innerHTML=localTestimonials.map(x=>`<article class="card story"><img src="${x[3]}" alt="${x[0]}"><p>${x[2]}</p><div class="who">— ${x[0]} · ${x[1]}</div></article>`).join('');
- const g=document.getElementById('galleryGrid');
- if(g)g.innerHTML=localGallery.map(x=>`<figure><img loading="lazy" src="${x[1]}" alt="${x[0]}"><figcaption>${x[0]} · ${x[2]}</figcaption></figure>`).join('');
+
+function text(id,v){const e=document.getElementById(id);if(e)e.textContent=v??'—'}
+function parseCSV(csv){const rows=[];let row=[],cell='',q=false;for(let i=0;i<csv.length;i++){const c=csv[i],n=csv[i+1];if(c==='"'){if(q&&n==='"'){cell+='"';i++}else q=!q}else if(c===','&&!q){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(cell);cell='';if(row.some(v=>v!==''))rows.push(row);row=[]}else cell+=c}if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row)}if(!rows.length)return[];const headers=rows.shift().map(x=>x.trim());return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}}
+async function fetchSheet(name){if(!ready)return[];const u=`https://docs.google.com/spreadsheets/d/${encodeURIComponent(cfg.spreadsheetId)}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}`;const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error('Could not read '+name);return parseCSV(await r.text())}
+function applyStats(s){text('womenReached',Number(s.women_reached||0).toLocaleString('en-IN')+'+');text('sessions',Number(s.sessions||0).toLocaleString('en-IN')+'+');text('districtsReached',s.districts_reached);text('satisfaction',(s.satisfaction||0)+'%')}
+function normalizeDistricts(rows){if(!rows.length)return fallbackDistricts.map(x=>({name:x[0],alias:x[1],priority:x[2],pads:x[3],people:x[4],active:true}));return rows.map(r=>{const name=(r.name||'').trim();return{name,alias:name==='Bokaro'?'':(r.city_alias||''),priority:String(r.priority).toUpperCase()==='TRUE',pads:Number(r.pads_distributed||0),people:Number(r.people_helped||0),active:String(r.active).toUpperCase()!=='FALSE'}}).filter(x=>x.active)}
+let districts=[];
+function focusCard(d){const bg=focusImages[d.name]||focusImages.Ranchi;const alias=d.name==='Bokaro'?'':d.alias;return `<article class="focus-card"><div class="focus-photo" style="background-image:url('${bg}')"><strong>${d.name}${alias?`<span>(${alias})</span>`:''}</strong></div><div class="focus-metrics"><div class="metric-row"><div class="metric-icon">♧</div><div><b>${d.pads.toLocaleString('en-IN')}</b><small>Pads distributed</small></div></div><div class="metric-row"><div class="metric-icon">♙</div><div><b>${d.people.toLocaleString('en-IN')}</b><small>People helped</small></div></div></div></article>`}
+function miniCard(d){const alias=d.name==='Bokaro'?'':d.alias;return `<article class="mini"><strong>${d.name}${alias?` (${alias})`:''}</strong><div class="mini-metrics"><span><b>${d.pads.toLocaleString('en-IN')}</b> pads distributed</span><span><b>${d.people.toLocaleString('en-IN')}</b> people helped</span></div></article>`}
+function renderDistricts(rows){districts=normalizeDistricts(rows);const focus=districts.filter(d=>d.priority).slice(0,6);document.getElementById('priorityDistricts').innerHTML=focus.map(focusCard).join('');document.getElementById('allDistricts').innerHTML=districts.map(miniCard).join('')}
+function renderContent(){document.getElementById('testimonials').innerHTML=testimonialData.map(x=>`<article class="story"><img src="${x[3]}" alt="${x[0]}"><p>“${x[2]}”</p><div class="who">— ${x[0]} · ${x[1]}</div></article>`).join('');document.getElementById('galleryGrid').innerHTML=galleryData.map(x=>`<figure><img loading="lazy" src="${x[1]}" alt="${x[0]}"><figcaption>${x[0]}</figcaption></figure>`).join('')}
+
+/* V11-only visual fixes requested:
+   1) Make the Ritumati logo a little larger.
+   2) Hide the duplicate district-name text baked into the district photos
+      by making the existing lower photo gradient opaque. The visible district
+      name remains the single HTML label on top. */
+function applyV11VisualFixes(){
+  if(document.getElementById('v11-visual-fixes'))return;
+  const s=document.createElement('style');
+  s.id='v11-visual-fixes';
+  s.textContent=`
+    .brand img{width:60px!important;height:60px!important}
+    .focus-photo:after{
+      inset:0!important;
+      background:linear-gradient(
+        to bottom,
+        rgba(25,8,20,0) 0%,
+        rgba(25,8,20,0.04) 28%,
+        rgba(25,8,20,0.82) 56%,
+        rgba(25,8,20,0.97) 100%
+      )!important;
+    }
+    .focus-photo strong{z-index:2!important}
+  `;
+  document.head.appendChild(s);
 }
-async function load(){
-  renderLocalContent();
-  applyStats(fallbackStats);
-  renderDistricts([]);
-  if(!ready)return;
-  try{
-    const [s,rows]=await Promise.all([sheet(),districtSheet()]);
-    if(s)applyStats(s);
-    if(rows&&rows.length)renderDistricts(rows);
-  }catch(e){console.warn('Google Sheet data could not be loaded; showing starter numbers.',e);}
-}
+
+async function load(){applyV11VisualFixes();renderContent();applyStats(fallbackStats);renderDistricts([]);if(!ready)return;try{const [s,d]=await Promise.all([fetchSheet('Dashboard'),fetchSheet('Districts')]);if(s[0])applyStats(s[0]);if(d.length)renderDistricts(d)}catch(e){console.warn('Google Sheets unavailable; showing starter data.',e)}}
 load();
