@@ -48,6 +48,15 @@
 @media(max-width:1000px){.focus-grid{grid-template-columns:repeat(3,1fr)}.stories{grid-template-columns:repeat(3,1fr)}.impactbox{grid-template-columns:1fr 1fr}.impact-intro{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--line)}.impact-stat:nth-child(3){border-right:0}.gallery{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.links{display:none}.menu{display:block}.links.open{display:flex;position:absolute;left:0;right:0;top:68px;padding:18px 4%;background:#fffafd;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.ima{right:38px;width:72px;height:72px}.hero{min-height:610px;background-position:62% center}.hero:before{background:linear-gradient(90deg,rgba(255,240,247,.96),rgba(255,240,247,.65))}.hero h1{font-size:54px}.section-head{align-items:flex-start;flex-direction:column}.mission{grid-template-columns:1fr}.mission-photo img{width:100%;height:auto}.mission-photo{min-height:0}.mission-copy{padding:34px 25px}.all-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:540px){.brandname{font-size:15px}.tag{display:none}.focus-grid,.stories{grid-template-columns:repeat(2,1fr)}.impactbox{grid-template-columns:1fr}.impact-intro{grid-column:auto}.impact-stat{border-right:0;border-bottom:1px solid var(--line)}.impact-stat:last-child{border-bottom:0}.gallery{grid-template-columns:repeat(2,1fr)}.all-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.script{font-size:28px}.cta{padding:29px 23px;align-items:flex-start;flex-direction:column}}
+
+/* Gallery fix — show the complete photo without cropping */
+.galleryGrid figure img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+}
+
 </style>
 </head>
 <body>
