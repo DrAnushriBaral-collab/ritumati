@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#d22d82">
+<meta name="description" content="Ritumati — menstrual health, dignity and awareness across Jharkhand.">
+<title>Ritumati | Healthy Girls. Brighter Tomorrows.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --pink:#d12d82;--pink2:#e75a9e;--deep:#54103f;--ink:#351f31;--muted:#725d6c;
+ --bg:#fff8fc;--soft:#fff0f7;--soft2:#f9dbea;--line:#efd7e5;--white:#fff;
+ --shadow:0 16px 45px rgba(84,16,63,.10)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.5}a{text-decoration:none;color:inherit}button{font:inherit}img{display:block;max-width:100%}.wrap{width:min(1200px,92%);margin:auto}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,250,253,.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(209,45,130,.08)}
+.navin{height:68px;display:flex;align-items:center;gap:28px;position:relative}
+.brand{display:flex;align-items:center;gap:9px;color:var(--deep);font-weight:800}.brand img{width:46px;height:46px;object-fit:contain}.brandname{font-size:18px}.tag{display:block;color:var(--pink);font-size:7px;letter-spacing:.08em;line-height:1.1}
+.links{margin-left:auto;display:flex;align-items:center;gap:24px;padding-right:82px;font-size:12px;font-weight:800;color:#654f61}.links a:hover{color:var(--pink)}
+.manage{background:var(--pink);color:#fff!important;padding:12px 22px;border-radius:999px;box-shadow:0 9px 22px rgba(209,45,130,.2)}
+.ima{position:absolute;right:-3px;top:1px;width:66px;height:66px;object-fit:contain}.menu{display:none;border:0;background:none;font-size:26px;color:var(--deep);margin-left:auto}
+.hero{min-height:500px;position:relative;overflow:hidden;background:#fbe9f3 url("assets/hero.jpg") center right/cover no-repeat}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fff0f7 0%,rgba(255,240,247,.97) 26%,rgba(255,240,247,.70) 42%,rgba(255,226,240,.12) 68%,rgba(255,226,240,.02) 100%)}
+.hero-inner{position:relative;z-index:2;padding:66px 0 64px}.eyebrow,.kicker{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.eyebrow{display:inline-block;padding:7px 13px;background:#f7d4e6;color:var(--pink);border-radius:999px}
+.hero h1{font:700 clamp(54px,6.1vw,82px)/.96 "Playfair Display",serif;letter-spacing:-.055em;color:var(--deep);max-width:560px;margin:20px 0 15px}.hero h1 em{font-style:normal;color:var(--pink)}
+.hero-copy{max-width:535px;font-size:15px;color:#594554;margin:0}.script{font:600 31px/1.0 Caveat,cursive;color:var(--deep);margin:15px 0 14px}.actions{display:flex;gap:11px}.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 20px;font-weight:800;font-size:13px}.primary{background:var(--pink);color:#fff;box-shadow:0 9px 22px rgba(209,45,130,.17)}.outline{border:1px solid #e58db9;background:#fff8fc;color:var(--pink)}
+.impact{background:#fff0f7;padding:24px 0}.impactbox{display:grid;grid-template-columns:1.15fr repeat(4,1fr);background:rgba(255,248,252,.9);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+.impact-intro,.impact-stat{padding:23px 21px}.impact-intro{border-right:1px solid var(--line)}.impact-intro .kicker{color:var(--pink)}.impact-intro h2{font:700 30px/1 "Playfair Display",serif;color:var(--deep);margin:5px 0}.impact-intro p{font-size:12px;color:var(--muted);margin:0;max-width:150px}
+.impact-stat{display:flex;align-items:center;gap:12px;border-right:1px solid var(--line)}.impact-stat:last-child{border-right:0}.icon{width:47px;height:47px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--pink);font-size:20px;flex:0 0 auto}.impact-num{font:700 28px/1 "Playfair Display",serif;color:var(--pink)}.impact-label{font-size:10px;color:#5d4a59;margin-top:4px}
+.section{padding:54px 0}.section.alt{background:#fff0f7}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:19px}.kicker{color:var(--pink)}.section-head h2{font:700 clamp(31px,4vw,43px)/1.04 "Playfair Display",serif;color:var(--deep);margin:6px 0 5px}.section-head p{font-size:13px;color:var(--muted);margin:0}.view{border:1px solid #e48bb9;color:var(--pink);background:#fff;border-radius:999px;padding:10px 16px;font-size:11px;font-weight:900;cursor:pointer;white-space:nowrap}
+.focus-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.focus-card{min-width:0;border-radius:15px;overflow:hidden;background:#fff;border:1px solid #e8d5e1;box-shadow:0 8px 22px rgba(84,16,63,.09);cursor:pointer;padding:0;text-align:left}
+.focus-photo{height:118px;background-size:cover;background-position:center;position:relative;display:flex;align-items:end;padding:11px}.focus-photo:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(25,8,20,.72))}.focus-photo strong{position:relative;z-index:1;color:#fff;font:700 19px/1.05 "Playfair Display",serif;text-shadow:0 2px 9px rgba(0,0,0,.4)}.focus-photo span{display:block;font:600 12px/1.05 "DM Sans",sans-serif;margin-top:3px}
+.focus-metrics{padding:10px 11px;background:#fff;display:grid;gap:7px}.metric-row{display:grid;grid-template-columns:27px 1fr;gap:7px;align-items:center}.metric-icon{width:27px;height:27px;border-radius:50%;background:#fff0f7;color:var(--pink);display:grid;place-items:center;font-size:12px}.metric-row b{display:block;color:var(--pink);font-size:16px;line-height:1}.metric-row small{display:block;font-size:9px;color:var(--muted);margin-top:2px}
+.all-wrap{margin-top:28px}.hidden{display:none!important}.all-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mini{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;text-align:left;cursor:pointer}.mini:hover{border-color:#e16ca7}.mini strong{color:var(--deep);font-size:13px}.mini-metrics{display:flex;gap:18px;margin-top:7px;color:var(--muted);font-size:10px}.mini-metrics b{color:var(--pink);font-size:14px}
+.mission{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:0}.mission-photo{background:#f8dce9;display:flex;align-items:stretch;min-width:0}.mission-photo img{width:100%;height:auto;display:block;object-fit:contain;object-position:center}.mission-copy{background:#f8dce9;padding:38px 48px;position:relative;overflow:hidden}.mission-copy:after{content:"";position:absolute;right:-20px;bottom:-35px;width:180px;height:250px;border:25px solid rgba(233,140,183,.25);border-radius:50% 50% 0 50%;transform:rotate(-28deg)}.mission-copy h2{font:700 clamp(34px,4.2vw,51px)/1.03 "Playfair Display",serif;color:var(--deep);max-width:500px;margin:8px 0 15px;position:relative;z-index:2}.mission-copy p{max-width:535px;color:#644f5d;font-size:14px;position:relative;z-index:2}.mission-copy .btn{position:relative;z-index:2}
+.stories{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.story{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;min-height:164px}.story img{width:55px;height:76px;object-fit:cover;border-radius:7px;float:left;margin:0 8px 6px 0}.story p{font-size:10px;font-style:italic;line-height:1.42;margin:2px 0 11px}.who{clear:both;font-size:9px;font-weight:800;color:var(--pink)}
+.gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.gallery figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.gallery img{width:100%;aspect-ratio:1.3/1;object-fit:cover}.gallery figcaption{padding:8px 9px;font-size:10px;font-weight:800;color:#5c4756}
+.cta{background:linear-gradient(135deg,#55103f,#a72e7a);border-radius:24px;color:#fff;padding:37px 42px;display:flex;justify-content:space-between;align-items:center;gap:20px}.cta h2{font:700 34px/1.05 "Playfair Display",serif;margin:0}.cta p{margin:7px 0 0;opacity:.8;font-size:13px}.cta .outline{background:#fff;color:var(--pink);border:0}.footer{background:#2d0c25;color:#e8cadb;padding:28px 0}.foot{display:flex;justify-content:space-between;gap:20px}.foot b{font-size:16px}
+
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:300;background:rgba(50,10,38,.45);backdrop-filter:blur(5px);padding:25px;align-items:center;justify-content:center}.modal-backdrop.show{display:flex}
+.join-modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border:1px solid #eed4e3;border-radius:20px;box-shadow:0 30px 80px rgba(54,8,40,.28);position:relative}.join-head{display:flex;gap:14px;align-items:center;background:#fff0f7;padding:25px 30px;border-bottom:1px solid var(--line)}.join-mark{width:42px;height:42px;border-radius:50%;background:#d12d82;color:#fff;display:grid;place-items:center;font-size:18px}.join-head h2{font:700 30px/1 "Playfair Display",serif;color:var(--deep);margin:0}.join-head p{font-size:12px;color:var(--muted);margin:5px 0 0}.modal-close{position:absolute;right:16px;top:13px;border:0;background:transparent;color:var(--deep);font-size:27px;cursor:pointer;z-index:2}.join-modal form{padding:25px 30px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.join-modal label{display:block;font-size:12px;font-weight:700;color:#443040;margin-bottom:15px}.join-modal label span{color:var(--pink)}.join-modal input,.join-modal select,.join-modal textarea{display:block;width:100%;margin-top:7px;border:1px solid #d9ced6;background:#fff;border-radius:8px;padding:12px 13px;font:500 13px "DM Sans",sans-serif;color:var(--ink);outline:none}.join-modal input:focus,.join-modal select:focus,.join-modal textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(209,45,130,.08)}.form-actions{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:4px}.form-actions small{color:#7b6b77;font-size:10px}.form-actions .btn{border:0;cursor:pointer}.form-actions .btn:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:600px){.modal-backdrop{padding:12px}.join-head{padding:22px 20px}.join-modal form{padding:20px}.join-head h2{font-size:25px}.form-grid{grid-template-columns:1fr}.form-actions{align-items:flex-start;flex-direction:column}.form-actions .btn{width:100%}}
+
+@media(max-width:1000px){.focus-grid{grid-template-columns:repeat(3,1fr)}.stories{grid-template-columns:repeat(3,1fr)}.impactbox{grid-template-columns:1fr 1fr}.impact-intro{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--line)}.impact-stat:nth-child(3){border-right:0}.gallery{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.links{display:none}.menu{display:block}.links.open{display:flex;position:absolute;left:0;right:0;top:68px;padding:18px 4%;background:#fffafd;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.ima{right:38px;width:56px;height:56px}.hero{min-height:610px;background-position:62% center}.hero:before{background:linear-gradient(90deg,rgba(255,240,247,.96),rgba(255,240,247,.65))}.hero h1{font-size:54px}.section-head{align-items:flex-start;flex-direction:column}.mission{grid-template-columns:1fr}.mission-photo img{width:100%;height:auto}.mission-photo{min-height:0}.mission-copy{padding:34px 25px}.all-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.brandname{font-size:15px}.tag{display:none}.focus-grid,.stories{grid-template-columns:repeat(2,1fr)}.impactbox{grid-template-columns:1fr}.impact-intro{grid-column:auto}.impact-stat{border-right:0;border-bottom:1px solid var(--line)}.impact-stat:last-child{border-bottom:0}.gallery{grid-template-columns:repeat(2,1fr)}.all-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.script{font-size:28px}.cta{padding:29px 23px;align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<nav class="nav">
+<div class="wrap navin">
+<a class="brand" href="#home"><img src="assets/ritumati-logo.jpg" alt="Ritumati"><div><div class="brandname">Ritumati</div><small class="tag">HEALTHY GIRLS. BRIGHTER TOMORROWS.</small></div></a>
+<button class="menu" aria-label="Menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
+<div class="links" id="links"><a href="#impact">Impact</a><a href="#reach">Districts</a><a href="#stories">Stories</a><a href="#gallery">Gallery</a><a href="#updates">Updates</a><a href="#about">About</a></div>
+<img class="ima" src="assets/ima-msn-logo.png" alt="IMA-MSN">
+</div></nav>
+
+<header class="hero" id="home"><div class="wrap hero-inner">
+<span class="eyebrow">IMA-MSN Jharkhand • Community Initiative</span>
+<h1>Periods with <em>dignity.</em><br>Health with awareness.</h1>
+<p class="hero-copy">Ritumati is a community initiative focused on menstrual health, awareness, dignity and access — connecting people with education, support and appropriate healthcare.</p>
+<div class="script">Informed Today.<br>Healthier Tomorrows.</div>
+<div class="actions"><a class="btn primary" href="#reach">Our Work →</a><a class="btn outline" href="#contact">Get Involved</a></div>
+</div></header>
+
+<section class="impact" id="impact"><div class="wrap impactbox">
+<div class="impact-intro"><div class="kicker">Our Impact</div><h2>Real change.</h2><p>Stronger communities, healthier futures.</p></div>
+<div class="impact-stat"><div class="icon">♧</div><div><div class="impact-num" id="womenReached">—</div><div class="impact-label">Girls reached</div></div></div>
+<div class="impact-stat"><div class="icon">▣</div><div><div class="impact-num" id="sessions">—</div><div class="impact-label">Sessions conducted</div></div></div>
+<div class="impact-stat"><div class="icon">⌖</div><div><div class="impact-num" id="districtsReached">—</div><div class="impact-label">Districts covered</div></div></div>
+<div class="impact-stat"><div class="icon">♥</div><div><div class="impact-num" id="satisfaction">—</div><div class="impact-label">Reported improved awareness</div></div></div>
+</div></section>
+
+<section class="section" id="reach"><div class="wrap">
+<div class="section-head"><div><div class="kicker">Jharkhand Reach</div><h2>Our Focus Districts</h2><p>Working closely in these key districts to create maximum impact.</p></div><button class="view" id="showAllBtn">View all 24 districts →</button></div>
+<div class="focus-grid" id="priorityDistricts"></div>
+<div class="all-wrap hidden" id="allWrap"><div class="section-head"><div><div class="kicker">Full reach</div><h2 style="font-size:29px">All 24 districts</h2><p>Every district shows pads distributed and people helped.</p></div><button class="view" id="hideAllBtn">Show focus districts ↑</button></div><div class="all-grid" id="allDistricts"></div></div>
+</div></section>
+
+<section class="section alt"><div class="wrap mission"><div class="mission-photo"><img src="assets/mission.jpg" alt="Informed Today. Healthier Tomorrows."></div><div class="mission-copy"><div class="kicker">Our Mission</div><h2>Because every girl deserves better.</h2><p>We work towards a Jharkhand where every adolescent girl has access to menstrual health education, safe products, and a supportive environment to thrive with confidence and dignity.</p><a class="btn primary" href="#about">Learn More About Us →</a></div></div></section>
+
+<section class="section" id="stories"><div class="wrap"><div class="section-head"><div><div class="kicker">Voices of Change</div><h2>Real voices, real experiences.</h2><p>Stories from girls, teachers and communities.</p></div><a class="view" href="#contact">View All Stories →</a></div><div class="stories" id="testimonials"></div></div></section>
+
+<section class="section alt" id="gallery"><div class="wrap"><div class="section-head"><div><div class="kicker">Gallery</div><h2>Moments from the work.</h2><p>Sessions, workshops and community outreach.</p></div><a class="view" href="#gallery">View Full Gallery →</a></div><div class="gallery" id="galleryGrid"></div></div></section>
+
+<section class="section" id="updates"><div class="wrap"><div class="section-head"><div><div class="kicker">Field Notes</div><h2>Latest updates.</h2><p>Programme moments and upcoming work.</p></div></div><div class="all-grid"><article class="mini"><strong>Community sessions</strong><div class="mini-metrics">Menstrual health education · Outreach</div></article><article class="mini"><strong>Adolescent health circles</strong><div class="mini-metrics">Safe conversations · Awareness</div></article><article class="mini"><strong>Volunteer network</strong><div class="mini-metrics">People · Communities · Action</div></article><article class="mini"><strong>District expansion</strong><div class="mini-metrics">Jharkhand · 24 districts</div></article></div></div></section>
+
+<section class="section alt" id="about"><div class="wrap"><div class="section-head"><div><div class="kicker">About Ritumati</div><h2>A kinder conversation around periods.</h2><p>Dignity is part of health. We make menstrual health easier to understand, discuss and act on through education, community engagement and appropriate support.</p></div></div></div></section>
+
+<section class="section" id="contact"><div class="wrap cta"><div><h2>Ready to support the movement?</h2><p>Volunteer, partner, host a session or help us reach more communities.</p></div><button class="btn outline" type="button" onclick="openJoin()">Start a conversation</button></div></section>
+
+<div class="modal-backdrop" id="joinModal" aria-hidden="true">
+  <div class="join-modal" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+    <button class="modal-close" type="button" onclick="closeJoin()" aria-label="Close">×</button>
+    <div class="join-head"><div class="join-mark">✦</div><div><h2 id="joinTitle">Join the Movement</h2><p>Tell us a little about yourself and how you'd like to get involved.</p></div></div>
+    <form id="joinForm">
+      <div class="form-grid">
+        <label>Full Name <span>*</span><input name="name" required placeholder="Your full name"></label>
+        <label>Email Address <span>*</span><input name="email" type="email" required placeholder="you@example.com"></label>
+        <label>Phone Number<input name="phone" type="tel" placeholder="+91 98765 43210"></label>
+        <label>I'm interested in <span>*</span><select name="interest" required><option value="">Select an option</option><option>Volunteer</option><option>Partner with Ritumati</option><option>Host a session</option><option>Support / Donate</option><option>Other</option></select></label>
+      </div>
+      <label>Message (Optional)<textarea name="message" rows="4" placeholder="Tell us more about how you'd like to support..."></textarea></label>
+      <div class="form-actions"><small id="formStatus">Your response will help us build a healthier, brighter tomorrow for every girl.</small><button class="btn primary" type="submit" id="submitJoin">Submit →</button></div>
+    </form>
+  </div>
+</div>
+
+<footer class="footer"><div class="wrap foot"><div><b>Ritumati</b><br><small>Menstrual Health • Dignity • Awareness</small></div><small>Community initiative under IMA-MSN Jharkhand</small></div></footer>
+<script src="config.js"></script><script src="app.js"></script>
+<script>
+document.getElementById('showAllBtn').onclick=()=>{document.getElementById('allWrap').classList.remove('hidden');document.getElementById('showAllBtn').classList.add('hidden');document.getElementById('allWrap').scrollIntoView({behavior:'smooth',block:'start'})};
+document.getElementById('hideAllBtn').onclick=()=>{document.getElementById('allWrap').classList.add('hidden');document.getElementById('showAllBtn').classList.remove('hidden');document.getElementById('reach').scrollIntoView({behavior:'smooth',block:'start'})};
+</script>
+
+<script>
+function openJoin(){const m=document.getElementById('joinModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function closeJoin(){const m=document.getElementById('joinModal');m.classList.remove('show');m.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+document.getElementById('joinModal').addEventListener('click',e=>{if(e.target.id==='joinModal')closeJoin()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeJoin()});
+document.getElementById('joinForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const form=e.currentTarget, btn=document.getElementById('submitJoin'), status=document.getElementById('formStatus');
+ const endpoint=(window.RITUMATI_CONFIG||{}).joinFormUrl||'';
+ if(!endpoint){status.textContent='Form connection is not set up yet. Add your Google Apps Script URL in config.js.';status.style.color='#b21d68';return}
+ btn.disabled=true;btn.textContent='Sending…';status.textContent='Submitting your response…';
+ try{
+   const data=Object.fromEntries(new FormData(form).entries());
+   data.submitted_at=new Date().toISOString();
+   await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+   form.reset();status.textContent='Thank you! Your response has been received.';status.style.color='#198754';btn.textContent='Submitted ✓';
+   setTimeout(()=>{closeJoin();btn.disabled=false;btn.textContent='Submit →';status.style.color='';status.textContent='Your response will help us build a healthier, brighter tomorrow for every girl.'},1800);
+ }catch(err){console.error(err);status.textContent='Something went wrong. Please try again.';status.style.color='#b21d68';btn.disabled=false;btn.textContent='Submit →'}
+});
+</script>
+</body></html>

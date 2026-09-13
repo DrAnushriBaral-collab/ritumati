@@ -1,0 +1,4 @@
+window.RITUMATI_CONFIG={
+  spreadsheetId:'YOUR_GOOGLE_SHEET_ID',
+  joinFormUrl:'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'
+};
