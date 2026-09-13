@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+<rect width="600" height="600" fill="#f6d7e8"/><circle cx="300" cy="230" r="100" fill="#e94b9b"/>
+<path d="M130 560c20-135 95-190 170-190s150 55 170 190" fill="#7b155f"/>
+<text x="300" y="470" text-anchor="middle" font-family="Arial" font-size="34" font-weight="700" fill="#fff">Testimonial 6</text>
+</svg>
