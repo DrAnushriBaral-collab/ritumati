@@ -1,74 +1,57 @@
-# Ritumati V11 — Pink NGO Website
+# Ritumati Website — V12 | Simple Google Sheets + GitHub
 
-This version follows the approved pink reference layout.
+This version keeps the setup intentionally simple:
 
-## Simple architecture
+- **Google Sheets** = impact numbers only.
+- **GitHub** = all website code and photos.
+- **GitHub Pages** = public website hosting.
+- No SQL, Supabase, Firebase, database server or secret keys.
 
-- GitHub = website code + all public photos
-- Google Sheets = impact numbers and district numbers
-- GitHub Pages = hosting
-- No SQL, Supabase, Firebase or database server
+## One-time Google Sheets setup
 
-## Google Sheets
+1. Upload `Ritumati_Google_Sheet_Template.xlsx` to Google Drive.
+2. Open it with Google Sheets.
+3. Keep the `Dashboard` tab and its first row exactly as supplied:
+   `women_reached | sessions | districts_reached | satisfaction | annual_goal | annual_completed`
+4. Put your real numbers in row 2.
+5. In the `Districts` tab, each of all 24 districts has two editable figures: `pads_distributed` and `people_helped`. These are shown on every district card and in the selected district snapshot.
+6. In Google Sheets choose **File → Share → Publish to web**.
+7. Choose the whole spreadsheet and publish it.
+8. Copy the Google Sheet ID from its address. It is the long value between `/d/` and `/edit`.
+9. Open `config.js` in this repository and replace `YOUR_GOOGLE_SHEET_ID` with that ID.
+10. Commit the change to GitHub.
 
-Dashboard columns:
-`women_reached | sessions | districts_reached | satisfaction | annual_goal | annual_completed`
+The website reads the public `Dashboard` and `Districts` tabs using Google's published CSV endpoint. Visitors do not need Google login.
 
-Districts columns:
-`name | city_alias | priority | description | active | pads_distributed | people_helped`
+## Updating numbers
 
-Publish the spreadsheet to web as CSV, then put the Spreadsheet ID in `config.js`.
+Edit row 2 of the `Dashboard` tab. For example:
+
+`1200` → `1500`
+
+The public website will use the new number when it loads/refreshed.
 
 ## Photos
 
-All current visual assets are local in GitHub:
-- `assets/hero.jpg`
-- `assets/mission.jpg`
-- `assets/photos/districts/`
-- `assets/photos/testimonials/`
-- `assets/photos/gallery/`
+All photos stay in GitHub:
 
-Replace these placeholder/reference images with approved Ritumati photos when available.
+- `assets/photos/gallery/`
+- `assets/photos/testimonials/`
+
+Replace the starter SVG files with your JPG/PNG files. If you keep the same filenames, no code change is needed. Otherwise update the matching paths in `app.js`.
 
 ## GitHub Pages
 
-Settings → Pages → Deploy from a branch → `main` → `/(root)` → Save.
+In the repository:
 
-Expected URL:
+**Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**
+
+The site will be available at:
+
 `https://abhishek05102001.github.io/Ritumati/`
 
+## Important
 
-## District naming
-Bokaro is displayed only as **Bokaro**. Jamshedpur is used only as the city alias for **East Singhbhum**.
+Do not put private beneficiary information in the Google Sheet because the Dashboard is publicly published. Use appropriate consent for real people's photographs and testimonial quotes.
 
-
-## V9 fixes
-- Bokaro never displays a Jamshedpur alias, even if the sheet contains one.
-- Mission image uses the full artwork without cropping the handwritten “Informed Today. Healthier Tomorrows.” text.
-- Responsive layout retained for desktop, tablet and mobile.
-
-
-## V10 fixes
-- Mission artwork is now a real `<img>` element, so the complete “Informed Today. Healthier Tomorrows.” artwork is shown without horizontal cropping.
-- Desktop uses the image's natural aspect ratio; mobile stacks it cleanly.
-
-## Join form → same Google Sheet
-
-The public “Start a conversation” button opens a small form. Responses are stored in a `Join Responses` tab in the **same Google Sheet**.
-
-One-time setup:
-1. Open the Ritumati Google Sheet.
-2. Extensions → Apps Script.
-3. Replace the default code with the contents of `google-apps-script.gs`.
-4. Save.
-5. Run `setup` once and authorize it.
-6. Deploy → New deployment → Web app.
-7. Execute as: **Me**.
-8. Who has access: **Anyone**.
-9. Deploy and copy the Web app URL.
-10. Put that URL into `config.js` as `joinFormUrl`.
-11. Keep your Sheet ID in `spreadsheetId`.
-
-The form stores: submitted time, name, email, phone, interest and message.
-
-Security/privacy: because responses contain contact details, the `Join Responses` tab should NOT be published to the web. Only the public Dashboard/Districts data should be published.
+The IMA-MSN logo supplied by the user is stored locally as `assets/ima-msn-logo.png` with the outer white background removed and is shown in the top-right corner. The Ritumati logo is slightly enlarged for clarity. The six priority districts are shown first; the remaining 18 districts are hidden until “View all 24 districts” is clicked.
