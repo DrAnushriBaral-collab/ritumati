@@ -25,7 +25,11 @@ const galleryData=[
 ['Health education','assets/photos/gallery/gallery-2.jpg'],
 ['Volunteer engagement','assets/photos/gallery/gallery-3.jpg'],
 ['Periods are normal','assets/photos/gallery/gallery-4.jpg'],
-['School outreach','assets/photos/gallery/gallery-5.jpg']
+['School outreach','assets/photos/gallery/gallery-5.jpg'],
+['Community outreach – Ritumati volunteers','assets/photos/gallery/gallery-6.jpg'],
+['School outreach – group 1','assets/photos/gallery/gallery-7.jpg'],
+['School outreach – group 2','assets/photos/gallery/gallery-8.jpg'],
+['School outreach – group 3','assets/photos/gallery/gallery-9.jpg']
 ];
 function text(id,v){const e=document.getElementById(id);if(e)e.textContent=v??'—'}
 function parseCSV(csv){const rows=[];let row=[],cell='',q=false;for(let i=0;i<csv.length;i++){const c=csv[i],n=csv[i+1];if(c==='"'){if(q&&n==='"'){cell+='"';i++}else q=!q}else if(c===','&&!q){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(cell);cell='';if(row.some(v=>v!==''))rows.push(row);row=[]}else cell+=c}if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row)}if(!rows.length)return[];const headers=rows.shift().map(x=>x.trim());return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}
